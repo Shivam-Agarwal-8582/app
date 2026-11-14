@@ -1,3 +1,4 @@
+
 package com.splitwise.modules.group.model;
 
 import com.splitwise.common.audit.BaseAuditableEntity;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "groups", indexes = {
+@Table(name = "splitwise_groups", indexes = {
         @Index(name = "idx_groups_creator", columnList = "created_by")
 })
 @Getter
@@ -52,8 +53,11 @@ public class Group extends BaseAuditableEntity {
     @JoinColumn(name = "created_by", nullable = false)
     private User createdBy;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "group",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     @Builder.Default
     private List<GroupMember> members = new ArrayList<>();
 }
-
